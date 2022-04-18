@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+}
+.flex {
+  display: flex;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+}
+
+.column-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+
+/****SHOW PAGE****/
+/*List item*/
+.list-item  {
+  img {
+    width: 40px;
+    border-radius: 25px;
+  }
+}
