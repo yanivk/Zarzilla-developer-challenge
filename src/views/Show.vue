@@ -5,7 +5,7 @@
       <div class="flex">
         <img :src="scheduleShow.image?.medium" alt="">
         <div>
-          <span>***** {{ scheduleShow.rating?.average / 2 }}/5</span>
+          <span class="flex"><star-component :rate="scheduleShow.rating?.average"/>{{ (scheduleShow.rating?.average / 2).toFixed(1) }}/5</span>
           <h1>{{ scheduleShow.name }}</h1>
           <span v-html="scheduleShow.summary"></span>
         </div>
@@ -51,9 +51,11 @@
 import { defineComponent } from 'vue'
 import { httpGet } from '@/tools/http-common'
 import { RouteLocationNormalized, useRoute } from 'vue-router'
+import StarComponent from '@/components/StarComponent.vue'
 
 export default defineComponent({
   name: 'Show',
+  components: { StarComponent },
   data () {
     return {
       scheduleShow: {},

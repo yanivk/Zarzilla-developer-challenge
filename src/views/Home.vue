@@ -1,7 +1,7 @@
 <template>
   <div class="header-content">
-    <div><h1>TV Bland</h1></div>
     <div class="header-text">
+      <h1>TV Bland</h1>
       <p>TV Show and web series database.</p>
       <p>Create personalised schedules. Episode guide, cast, crew and character information.</p>
     </div>
