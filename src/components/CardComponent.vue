@@ -6,15 +6,18 @@
           <div class="card-front" >
             <router-link :to="`/show/${scheduleList.show.id}`">
               <div><img :src="scheduleList.show.image.medium" alt=""></div>
+              <star-component :rate="scheduleList.show.rating?.average"/>
               <div>{{ scheduleList.show.name }}</div>
-              <div>{{ (scheduleList.show.rating.average / 2).toFixed(1) }}</div>
             </router-link>
           </div>
           <div class="card-back" @click="removeClassOnCursor">
-            <router-link :to="`/show/${scheduleList.show.id}`">
+            <router-link :to="`/show/${scheduleList.show.id}`" class="flex-column flex-center-xy full-height">
               <star-component :rate="scheduleList.show.rating?.average"/>
               <div>{{ scheduleList.show.language }}</div>
-              <p><span v-html="scheduleList.show?.summary.substr(0,155)"></span>Read more</p>
+              <div class="summary">
+                <span v-html="scheduleList.show?.summary.substr(0,155)"></span>
+                <p class="read-more-button">Read more</p>
+              </div>
             </router-link>
           </div>
         </div>

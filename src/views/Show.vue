@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="flex flex-center-xy full-size">
+  <div class="container flex flex-center-xy ">
     <div class="flex-grow-1">
       <h3>Show Info</h3>
       <div class="list">
