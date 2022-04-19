@@ -1,19 +1,15 @@
 <template>
-  <div class="container">
-    <div>TV Bland</div>
-    <div>
-      TV Show and web series database.
-      Create personalised schedules. Episode guide, cast, crew and character information.
+  <div class="header-content">
+    <div><h1>TV Bland</h1></div>
+    <div class="header-text">
+      <p>TV Show and web series database.</p>
+      <p>Create personalised schedules. Episode guide, cast, crew and character information.</p>
     </div>
-    <div>List Added Shows</div>
-    <div class="grid column-6">
-      <div v-for="scheduleList in scheduleLists" :key="scheduleList.id" class="card">
-        <router-link :to="`/show/${scheduleList.show.id}`">
-            <div>{{ scheduleList.show.name }}</div>
-            <div>{{ scheduleList.show.rating.average }}</div>
-            <div><img :src="scheduleList.show.image.medium"></div>
-        </router-link>
-      </div>
+  </div>
+  <div class="container">
+    <div class="bloc-list-schedule">
+      <div><h2>List Added Shows</h2></div>
+      <card-component :schedule-lists="scheduleLists" />
     </div>
   </div>
 </template>
@@ -21,9 +17,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { httpGet } from '@/tools/http-common'
+import cardComponent from '@/components/CardComponent.vue'
 
 export default defineComponent({
   name: 'Home',
+  components: {
+    cardComponent
+  },
+
   data () {
     return {
       scheduleLists: {}
@@ -32,7 +33,7 @@ export default defineComponent({
   mounted () {
     httpGet('schedule')
       .then((r) => {
-        this.scheduleLists = r
+        this.scheduleLists = r.data
       })
   }
 })

@@ -1,6 +1,16 @@
 import axios from 'axios'
 
-export async function httpGet (url: string): Promise<string> {
-  const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/${url}`)
-  return data
+type ResponsePromise = {
+  data: [],
+  status: number,
+  statusText: string,
+  headers: string,
+  config: string
+}
+export async function httpGet (url: string): Promise<ResponsePromise> {
+  try {
+    return await axios.get(`${process.env.VUE_APP_API_URL}/${url}`)
+  } catch (e) {
+    return e
+  }
 }
