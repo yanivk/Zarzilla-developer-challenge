@@ -81,11 +81,39 @@ b {
   background: -webkit-linear-gradient(to bottom, #381015 0%, #A3110E 100%);
   background: -moz-linear-gradient(to bottom, #381015 0%, #A3110E 100%);
   background: linear-gradient(to bottom, #381015 0%, #A3110E 100%);
-  padding: 0 100px;
+  padding: 0 100px 20px;
+
+  &-show-information {
+    margin-bottom: -50px;
+  }
+  &-show-information-text {
+    margin-left: 30px;
+    width: 60%;
+    text-align: justify;
+    .star {
+      margin: 10px 0;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+  h1:first-child {
+    //-webkit-text-stroke: 1px white;
+    text-shadow: 0 0 2px white;
+    padding-top: 70px;
+    margin-bottom: 20px;
+  }
 }
 .header-text {
-  height: 300px;
+  height: 400px;
   margin: 0;
+  h1 {
+    padding-top: 70px;
+  }
+  .header-sub-text {
+    margin-top: 20px;
+    width:380px;
+  }
 }
 
 .bloc-list-schedule {

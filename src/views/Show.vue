@@ -2,10 +2,10 @@
   <div class="header-content">
     <h1>TV Bland</h1>
     <div class="flex-column">
-      <div class="flex">
+      <div class="flex header-content-show-information">
         <img :src="scheduleShow.image?.medium" alt="">
-        <div>
-          <span class="flex"><star-component :rate="scheduleShow.rating?.average"/>{{ (scheduleShow.rating?.average / 2).toFixed(1) }}/5</span>
+        <div class="header-content-show-information-text">
+          <span class="flex star"><star-component :rate="scheduleShow.rating?.average"/>{{ (scheduleShow.rating?.average / 2).toFixed(1) }}/5</span>
           <h1>{{ scheduleShow.name }}</h1>
           <span v-html="scheduleShow.summary"></span>
         </div>
@@ -52,14 +52,14 @@ import { defineComponent } from 'vue'
 import { httpGet } from '@/tools/http-common'
 import { RouteLocationNormalized, useRoute } from 'vue-router'
 import StarComponent from '@/components/StarComponent.vue'
+import { store } from '@/store'
 
 export default defineComponent({
   name: 'Show',
   components: { StarComponent },
   data () {
     return {
-      scheduleShow: {},
-      peoples: {}
+      scheduleShow: {}
     }
   },
   computed: {
@@ -68,16 +68,19 @@ export default defineComponent({
     },
     id (): number {
       return typeof this.route.params.id === 'string' ? parseInt(this.route.params.id) : 0
+    },
+    peoples (): string {
+      return store.getters.getCast
     }
   },
-  mounted () {
-    httpGet(`shows/${this.id}`)
+  async mounted () {
+    await httpGet(`shows/${this.id}`)
       .then((r) => {
         this.scheduleShow = r.data
       })
-    httpGet(`shows/${this.id}/cast`)
+    await httpGet(`shows/${this.id}/cast`)
       .then((r) => {
-        this.peoples = r.data
+        store.commit('SET_CAST_INFORMATION', r.data)
       })
   }
 })
