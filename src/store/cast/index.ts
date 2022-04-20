@@ -4,8 +4,8 @@ import { mutations } from '@/store/cast/mutations'
 import { RootState } from '@/store'
 import ICast from '@/interfaces/ICast'
 
-const search: Module<ICast, RootState> = {
-  state: <ICast>{},
+const search: Module<ICast[], RootState> = {
+  state: <ICast[]>{},
   getters,
   mutations
 }

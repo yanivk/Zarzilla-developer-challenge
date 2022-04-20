@@ -38,10 +38,11 @@
     <div class="flex-grow-1">
       <h3>Starring</h3>
       <div class="list">
-        <div class="flex list-item" v-for="people in peoples" :key="people.person.id">
-          <img :src="people.person.image?.medium" alt=""/>
+        <pre>{{ peoples }}</pre>
+        <div class="flex list-item" v-for="(people, key) in peoples" :key="key">
+<!--          <img :src="people.person.image?.medium" alt=""/>
           <p class="list-title">{{ people.person.name }}</p>
-          <p class="list-value">{{ people.character.name }}</p>
+          <p class="list-value">{{ people.character.name }}</p>-->
         </div>
       </div>
     </div>
