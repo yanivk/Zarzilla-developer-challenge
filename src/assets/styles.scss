@@ -3,7 +3,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: none;
+  @media screen and (min-width: 768px) {
+    cursor: none;
+  }
   font-family: 'Akshar', sans-serif;
 }
 
@@ -40,7 +42,13 @@ b {
 
 .flex {
   display: flex;
+  &-m-column {
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
 }
+
 .flex-center-xy {
   justify-content: center;
   align-content: center;
@@ -91,12 +99,23 @@ b {
     padding: 0 100px 20px;
   }
   &-show-information {
-    margin-bottom: -50px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+    margin-bottom: 50px;
+    @media screen and (min-width: 768px) {
+      margin-bottom: -50px;
+    }
   }
   &-show-information-text {
-    margin-left: 30px;
-    width: 60%;
-    text-align: justify;
+    p {
+      text-align: justify;
+    }
+    @media screen and (min-width: 768px) {
+      margin-left: 30px;
+      width: 60%;
+      text-align: justify;
+    }
     .star {
       margin: 10px 0;
     }
@@ -223,29 +242,44 @@ b {
 }
 /****SHOW PAGE****/
 /*List item*/
+@media screen and (max-width: 768px) {
+  .list {
+    margin: 0 10px;
+  }
+}
+
 .flex{
   &.list-item  {
     align-items: center;
     img {
       width: 60px;
-      //margin: 5px 0;
     }
   }
 }
 
 .left-side, .right-side {
-  margin-top: 60px;
+  @media screen and (min-width: 768px) {
+    margin-top: 60px;
+  }
   h3 {
+    @media screen and (max-width: 768px) {
+      margin: 20px 10px;
+    }
     margin-bottom: 40px;
     color: #640E0F;
     font-size: 22px;
   }
   .list-item {
-    padding: 37.5px 0;
+    padding: 25px 0;
+    @media screen and (min-width: 768px) {
+      padding: 37.5px 0;
+    }
     border-bottom: 2px #640E0F solid;
     border-image: linear-gradient(to left, #d56573 0%, #14164d 100%);
     border-image-slice: 1;
-    width: 70%;
+    @media screen and (min-width: 768px) {
+      width: 70%;
+    }
     .list-title {
       color: #640E0F;
       font-weight: 600;
@@ -267,6 +301,9 @@ b {
 
 .pagination {
   margin-top: 15px;
+  @media screen and (max-width: 768px) {
+    margin: 15px 10px;
+  }
   img {
     width: 30px;
     height: 30px;

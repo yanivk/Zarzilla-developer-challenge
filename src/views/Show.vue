@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="container flex">
+  <div class="container flex flex-m-column">
     <div class="left-side flex-grow-1">
       <h3>Show Info</h3>
       <div class="list">
