@@ -5,7 +5,8 @@
       <div class="flex header-content-show-information">
         <img :src="scheduleShow.image?.medium" alt="">
         <div class="header-content-show-information-text">
-          <span class="flex star"><star-component :rate="scheduleShow.rating?.average"/>{{ (scheduleShow.rating?.average / 2).toFixed(1) }}/5</span>
+          <span class="flex star"><star-component
+            :rate="scheduleShow.rating?.average"/>{{ (scheduleShow.rating?.average / 2).toFixed(1) }}/5</span>
           <h1>{{ scheduleShow.name }}</h1>
           <span v-html="scheduleShow.summary"></span>
         </div>
@@ -13,8 +14,8 @@
     </div>
   </div>
 
-  <div class="container flex flex-center-xy ">
-    <div class="flex-grow-1">
+  <div class="container flex">
+    <div class="left-side flex-grow-1">
       <h3>Show Info</h3>
       <div class="list">
         <div class="flex list-item">
@@ -35,17 +36,32 @@
         </div>
       </div>
     </div>
-    <div class="flex-grow-1">
+    <div class="right-side flex-grow-1">
       <h3>Starring</h3>
       <div class="list">
-        <pre>{{ peoples }}</pre>
         <div class="flex list-item" v-for="(people, key) in peoples" :key="key">
-<!--          <img :src="people.person.image?.medium" alt=""/>
+          <img :src="people.person.image?.medium" alt=""/>
           <p class="list-title">{{ people.person.name }}</p>
-          <p class="list-value">{{ people.character.name }}</p>-->
+          <p class="list-value">{{ people.character.name }}</p>
+        </div>
+      </div>
+      <div class="flex space-between">
+        <div
+          @mouseenter="addClassOnCursor"
+          @mouseleave="removeClassOnCursor"
+          @click="increment"
+        >++
+        </div>
+        <div>TOTAL : {{ Math.round(totalPage) }}</div>
+        <div
+          @mouseenter="addClassOnCursor"
+          @mouseleave="removeClassOnCursor"
+          @click="decrement"
+        >--
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script lang="ts">
@@ -60,7 +76,8 @@ export default defineComponent({
   components: { StarComponent },
   data () {
     return {
-      scheduleShow: {}
+      scheduleShow: {},
+      count: 0
     }
   },
   computed: {
@@ -71,7 +88,10 @@ export default defineComponent({
       return typeof this.route.params.id === 'string' ? parseInt(this.route.params.id) : 0
     },
     peoples (): string {
-      return store.getters.getCast
+      return store.getters.getCast(this.count)
+    },
+    totalPage (): number {
+      return store.getters.getCastPaginate
     }
   },
   async mounted () {
@@ -83,6 +103,26 @@ export default defineComponent({
       .then((r) => {
         store.commit('SET_CAST_INFORMATION', r.data)
       })
+  },
+  methods: {
+    increment () {
+      if (this.count < this.totalPage) {
+        this.count++
+      }
+    },
+    decrement () {
+      if (this.count > 0) {
+        this.count--
+      }
+    },
+    addClassOnCursor () {
+      const cursor: HTMLElement = document.getElementsByClassName('cursor')[0] as HTMLElement
+      cursor.classList.add('cursor--big')
+    },
+    removeClassOnCursor () {
+      const cursor: HTMLElement = document.getElementsByClassName('cursor')[0] as HTMLElement
+      cursor.classList.remove('cursor--big')
+    }
   }
 })
 </script>

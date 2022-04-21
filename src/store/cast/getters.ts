@@ -6,17 +6,23 @@ export const getters: GetterTree<ICast[], RootState> = {
   getFullCast (state): ICast[] {
     return state
   },
-  getCast (state, getters): ICast[][] {
-    const paginate = []
-    for (let i = 0; i < getters.getCastPaginate; i++) {
-      for (let j = 0; j < 5; j++) {
-        paginate[i] = [Object.values(state)[j]]
+  getCast (state, getters): (page: number) => ICast[] {
+    return page => {
+      const paginate: any[] = []
+      let total = 0
+      for (let i = 0; i < getters.getCastPaginate; i++) {
+        paginate[i] = []
+        for (let j = 0; j < 5; j++) {
+          if (total < Object.keys(state).length) {
+            paginate[i].push(Object.values(state)[total])
+            total++
+          }
+        }
       }
+      return paginate[page]
     }
-    return paginate
   },
   getCastPaginate (state): number {
-    console.log(Object.keys(state))
     return Object.keys(state).length / 5
   }
 }
