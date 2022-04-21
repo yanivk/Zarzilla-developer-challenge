@@ -24,7 +24,7 @@
         </div>
         <div class="flex list-item">
           <p class="list-title">Schedule</p>
-          <p class="list-value">{{ scheduleShow.schedule?.days }}</p>
+          <p class="list-value"><span v-for="(day, key) in scheduleShow.schedule?.days" :key="key">{{ day }} &nbsp;</span></p>
         </div>
         <div class="flex list-item">
           <p class="list-title">Status</p>
@@ -32,7 +32,7 @@
         </div>
         <div class="flex list-item">
           <p class="list-title">Genres</p>
-          <p class="list-value">{{ scheduleShow.genres }}</p>
+          <p class="list-value"><span v-for="(genre, key) in scheduleShow.genres" :key="key">{{ genre }} &nbsp;</span></p>
         </div>
       </div>
     </div>
@@ -45,19 +45,23 @@
           <p class="list-value">{{ people.character.name }}</p>
         </div>
       </div>
-      <div class="flex space-between">
-        <div
-          @mouseenter="addClassOnCursor"
-          @mouseleave="removeClassOnCursor"
-          @click="increment"
-        >++
-        </div>
-        <div>TOTAL : {{ Math.round(totalPage) }}</div>
+      <div class="flex space-between flex-center-xy pagination">
         <div
           @mouseenter="addClassOnCursor"
           @mouseleave="removeClassOnCursor"
           @click="decrement"
-        >--
+          class="flex flex-center-xy right decrement"
+        >
+          <img src="../assets/icons/previous.svg"> <p> Previous</p>
+        </div>
+        <div>{{ count }} / {{ Math.round(totalPage) }}</div>
+        <div
+          @mouseenter="addClassOnCursor"
+          @mouseleave="removeClassOnCursor"
+          @click="increment"
+          class="flex flex-center-xy increment"
+        >
+          <p>Next</p><img src="../assets/icons/next.svg">
         </div>
       </div>
     </div>

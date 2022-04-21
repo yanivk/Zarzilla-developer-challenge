@@ -12,7 +12,7 @@ export const getters: GetterTree<ICast[], RootState> = {
       let total = 0
       for (let i = 0; i < getters.getCastPaginate; i++) {
         paginate[i] = []
-        for (let j = 0; j < 5; j++) {
+        for (let j = 0; j < 4; j++) {
           if (total < Object.keys(state).length) {
             paginate[i].push(Object.values(state)[total])
             total++
@@ -23,6 +23,6 @@ export const getters: GetterTree<ICast[], RootState> = {
     }
   },
   getCastPaginate (state): number {
-    return Object.keys(state).length / 5
+    return Object.keys(state).length / 4
   }
 }

@@ -5,9 +5,9 @@
         <div class="card" @mouseenter="addClassOnCursor" @mouseleave="removeClassOnCursor">
           <div class="card-front" >
             <router-link :to="`/show/${scheduleList.show.id}`">
-              <div><img :src="scheduleList.show.image.medium" alt=""></div>
+              <div><img :src="scheduleList.show.image.medium" alt="" class="poster"></div>
               <star-component :rate="scheduleList.show.rating?.average"/>
-              <div>{{ scheduleList.show.name }}</div>
+              <div class="title">{{ scheduleList.show.name }}</div>
             </router-link>
           </div>
           <div class="card-back" @click="removeClassOnCursor">
